@@ -39,54 +39,136 @@ function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
       return (
+        <ValidatorForm  onError={() => null}>
+        <Grid container spacing={6}>
+          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
+            <TextField
+              type="text"
+              name="nom"
+              id="standard-basic"
+              value={""}
+              errorMessages={["Le nom est requis"]}
+              label="Entrez l'examen (BEPC,BAC,...)"
+              validators={["required", "minStringLength: 4"]}
+            />
+
+            <TextField
+              type="email"
+              name="email"
+              label="Le type (Blanc,national)"
+              value={""}
+              validators={["required", "isEmail"]}
+              errorMessages={["Veuillez préciser"]}
+            />
+
+            <TextField
+              type="text"
+              name="Choix des centres de compositions"
+              label="Adresse physique"
+              value={""}
+              validators={["required"]}
+              errorMessages={["Champ obligatoire"]}
+            />
+            <TextField
+              type="text"
+              name="contact"
+              label="Contact"
+              value={""}
+              validators={["required"]}
+              errorMessages={["Champ obligatoire"]}
+            />
+
+            <TextField
+              name="password"
+              type="password"
+              label="Password"
+              value={""}
+              validators={["required"]}
+              errorMessages={["this field is required"]}
+            />
+
+            {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                renderInput={(props) => (
+                  <TextField
+                    {...props}
+                    label="Date picker"
+                    id="mui-pickers-date"
+                    sx={{ mb: 2, width: "100%" }}
+                  />
+                )}
+              />
+            </LocalizationProvider> */}
+          </Grid>
+
+          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
+           {/*  <RadioGroup
+              row
+              name="gender"
+              sx={{ mb: 2 }}
+              value={gender || ""}
+              onChange={handleChange}>
+              <FormControlLabel
+                value="Male"
+                label="Male"
+                labelPlacement="end"
+                control={<Radio color="secondary" />}
+              />
+
+              <FormControlLabel
+                value="Female"
+                label="Female"
+                labelPlacement="end"
+                control={<Radio color="secondary" />}
+              />
+
+              <FormControlLabel
+                value="Others"
+                label="Others"
+                labelPlacement="end"
+                control={<Radio color="secondary" />}
+              />
+            </RadioGroup> */}
+
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Centre de composition."
+            />
+          </Grid>
+        </Grid>
+
+        {/* <Button sx={{float: 'right'}} color="primary" variant="contained" type="submit">
+          <Icon>send</Icon>
+          <Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
+        </Button> */}
+      </ValidatorForm>
+      );
+
+    case 1:
+      return (
         <div>
           <ValidatorForm onError={() => null}>
             <Grid container spacing={6}>
               <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
+                    <Button color="primary"
+                    sx={{ display:'inline-block', mr:5 }}
+                     variant="outlined" type="submit">
+                Blanc
+                
+              </Button>
+              <Button color="secondary"
+
+sx={{ display:'inline-block', mr:5 }}
+              
+              variant="outlined" type="submit">
+
+                National
+                
+              </Button>
+    
                 <TextField
+                  sx={{ mb: 4, display: 'none' }}
                   type="text"
-                  name="username"
-                  id="standard-basic"
-                  value={ ""}
-                  errorMessages={["this field is required"]}
-                  label="Username (Min length 4, Max length 9)"
-                  validators={["required", "minStringLength: 4", "maxStringLength: 9"]}
-                />
-    
-                <TextField
-                  type="text"
-                  name="firstName"
-                  label="First Name"
-                  value={""}
-                  validators={["required"]}
-                  errorMessages={["this field is required"]}
-                />
-    
-                <TextField
-                  type="email"
-                  name="email"
-                  label="Email"
-                  value={""}
-                  validators={["required", "isEmail"]}
-                  errorMessages={["this field is required", "email is not valid"]}
-                />
-    
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    renderInput={(props) => (
-                      <TextField
-                        {...props}
-                        label="Date picker"
-                        id="mui-pickers-date"
-                        sx={{ mb: 2, width: "100%" }}
-                      />
-                    )}
-                  />
-                </LocalizationProvider>
-    
-                <TextField
-                  sx={{ mb: 4 }}
-                  type="number"
                   name="creditCard"
                   label="Credit Card"
                   value={""}
@@ -94,72 +176,10 @@ function getStepContent(stepIndex) {
                   validators={["required", "minStringLength:16", "maxStringLength: 16"]}
                 />
               </Grid>
-    
-              <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
-                <TextField
-                  type="text"
-                  name="mobile"
-                  value={""}
-                  label="Mobile Nubmer"
-                  validators={["required"]}
-                  errorMessages={["this field is required"]}
-                />
-                <TextField
-                  name="password"
-                  type="password"
-                  label="Password"
-                  value={""}
-                  validators={["required"]}
-                  errorMessages={["this field is required"]}
-                />
-                <TextField
-                  type="password"
-                  name="confirmPassword"
-                  label="Confirm Password"
-                  value={""}
-                  validators={["required", "isPasswordMatch"]}
-                  errorMessages={["this field is required", "password didn't match"]}
-                />
-                <RadioGroup
-                  row
-                  name="gender"
-                  sx={{ mb: 2 }}
-                  value={""}
-                  >
-                  <FormControlLabel
-                    value="Male"
-                    label="Male"
-                    labelPlacement="end"
-                    control={<Radio color="secondary" />}
-                  />
-    
-                  <FormControlLabel
-                    value="Female"
-                    label="Female"
-                    labelPlacement="end"
-                    control={<Radio color="secondary" />}
-                  />
-    
-                  <FormControlLabel
-                    value="Others"
-                    label="Others"
-                    labelPlacement="end"
-                    control={<Radio color="secondary" />}
-                  />
-                </RadioGroup>
-    
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label="I have read and agree to the terms of service."
-                />
-              </Grid>
             </Grid>
           </ValidatorForm>
         </div>
       );
-
-    case 1:
-      return `Integer euismod dapibus sapien, a interdum augue blandit eget. Donec pellentesque, sapien iaculis dignissim sagittis, risus nulla auctor eros, sed suscipit eros mauris id lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer porttitor mauris egestas consequat molestie. Nam egestas iaculis malesuada. Praesent sagittis venenatis finibus. Praesent porttitor ipsum et sapien cursus, eu mattis augue ornare.`;
 
     case 2:
       return `In laoreet, dui vel tristique facilisis, velit dui dictum diam, nec feugiat mi mauris eu nunc. Nullam auctor eget ante ac laoreet. Aliquam et ante ligula. Nam imperdiet augue magna, ac tincidunt neque mollis nec. Sed eu nunc sit amet tellus commodo elementum non sit amet sem. Etiam ipsum nibh, rutrum vel ultrices in, vulputate ac dolor. Morbi dictum lectus id orci dapibus, et faucibus nulla viverra. Nulla consectetur ex vitae pretium vehicula. Quisque varius tempor erat et semper. Vivamus consectetur, eros sit amet ornare facilisis, nulla felis laoreet tortor, sit amet egestas risus ipsum sed eros.`;

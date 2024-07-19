@@ -4,6 +4,7 @@ import SimpleCheckbox from "./SimpleCheckbox";
 import LabelledCheckbox from "./LabelledCheckbox";
 import FormGroupCheckbox from "./FormGroupCheckbox";
 import PlacingCheckboxLabel from "./PlacingCheckboxLabel";
+import StepperForm from "../forms/StepperForm";
 
 // STYLED COMPONENTS
 const Container = styled("div")(({ theme }) => ({
@@ -20,11 +21,14 @@ export default function AppCheckbox() {
     <Container>
       <Box className="breadcrumb">
         <Breadcrumb
-          routeSegments={[{ name: "Material", path: "/material" }, { name: "Chckbox" }]}
+          routeSegments={[{ name: "Admin", path: "/material" }, { name: "programmer une session" }]}
         />
       </Box>
+      <SimpleCard title="Programmation d'une session">
+          <StepperForm />
+        </SimpleCard> 
 
-      <SimpleCard title="simple checkbox">
+      {/* <SimpleCard title="simple checkbox">
         <SimpleCheckbox />
       </SimpleCard>
 
@@ -44,7 +48,7 @@ export default function AppCheckbox() {
 
       <SimpleCard title="Checkbox with Different Label Placement">
         <PlacingCheckboxLabel />
-      </SimpleCard>
+      </SimpleCard> */}
     </Container>
   );
 }

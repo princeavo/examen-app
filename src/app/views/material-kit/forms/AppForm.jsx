@@ -27,9 +27,9 @@ export default function AppForm() {
         </SimpleCard>
         
 
-        <SimpleCard title="Programmation d'une session">
+        {/* <SimpleCard title="Programmation d'une session">
           <StepperForm />
-        </SimpleCard>
+        </SimpleCard> */}
       </Stack>
     </Container>
   );

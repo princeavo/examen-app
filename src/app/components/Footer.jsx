@@ -41,16 +41,16 @@ export default function Footer() {
       <AppBar color="primary" position="static" sx={{ zIndex: 96 }}>
         <AppFooter>
           <FooterContent>
-            <a href="https://ui-lib.com/downloads/matx-pro-react-admin/">
+            {/* <a href="https://ui-lib.com/downloads/matx-pro-react-admin/">
               <Button variant="contained" color="secondary">
                 Get MatX Pro
               </Button>
-            </a>
+            </a> */}
 
             <Span m="auto"></Span>
 
             <Paragraph m={0}>
-              Design and Developed by <a href="http://ui-lib.com">UI Lib</a>
+              Design and Developed by <a href="h#">fadelsew02</a>
             </Paragraph>
           </FooterContent>
         </AppFooter>

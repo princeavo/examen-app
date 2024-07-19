@@ -61,6 +61,7 @@ export default function Breadcrumb({ routeSegments }) {
                   <SubName>{route.name}</SubName>
                 </NavLink>
               ) : (
+                
                 <SubName key={index}>{route.name}</SubName>
               );
             })

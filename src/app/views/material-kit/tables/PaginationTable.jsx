@@ -107,11 +107,13 @@ export default function PaginationTable() {
       <StyledTable>
         <TableHead>
           <TableRow>
-            <TableCell align="left">Name</TableCell>
-            <TableCell align="center">Company</TableCell>
-            <TableCell align="center">Start Date</TableCell>
-            <TableCell align="center">Status</TableCell>
-            <TableCell align="center">Amount</TableCell>
+            <TableCell align="left">Logo</TableCell>
+            <TableCell align="center">Nom</TableCell>
+            <TableCell align="center">Sigle</TableCell>
+            <TableCell align="center">Email</TableCell>
+            <TableCell align="center">Adresse Physique</TableCell>
+            <TableCell align="center">Contact</TableCell>
+            <TableCell align="center">Capacite</TableCell>
             <TableCell align="right">Action</TableCell>
           </TableRow>
         </TableHead>
@@ -121,6 +123,8 @@ export default function PaginationTable() {
             .map((subscriber, index) => (
               <TableRow key={index}>
                 <TableCell align="left">{subscriber.name}</TableCell>
+                <TableCell align="center">{subscriber.company}</TableCell>
+                <TableCell align="center">{subscriber.company}</TableCell>
                 <TableCell align="center">{subscriber.company}</TableCell>
                 <TableCell align="center">{subscriber.date}</TableCell>
                 <TableCell align="center">{subscriber.status}</TableCell>

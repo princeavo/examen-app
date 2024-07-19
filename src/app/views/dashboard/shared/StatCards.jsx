@@ -1,4 +1,4 @@
-import { Box, Card, Grid, IconButton, styled, Tooltip } from "@mui/material";
+import { Box, Card, Grid, IconButton, styled, Tooltip, Divider } from "@mui/material";
 import { AttachMoney, Group, ShoppingCart, Store, ArrowRightAlt } from "@mui/icons-material";
 import { Small } from "app/components/Typography";
 
@@ -31,13 +31,14 @@ const Heading = styled("h6")(({ theme }) => ({
 
 export default function StatCards() {
   const cardList = [
-    { name: "New Leads", amount: 3050, Icon: Group },
-    { name: "This week Sales", amount: "$80,500", Icon: AttachMoney },
-    { name: "Inventory Status", amount: "8.5% Stock Surplus", Icon: Store },
-    { name: "Orders to deliver", amount: "305 Orders", Icon: ShoppingCart }
+    { name: "Ecoles enregistrées", amount: 112, Icon: Group },
+    { name: "Candidats enregistrés", amount: "3125", Icon: Group },
+    // { name: "Inventory Status", amount: "8.5% Stock Surplus", Icon: Store },
+    // { name: "Orders to deliver", amount: "305 Orders", Icon: ShoppingCart }
   ];
 
   return (
+    <>
     <Grid container spacing={3} sx={{ mb: "24px" }}>
       {cardList.map(({ amount, Icon, name }) => (
         <Grid item xs={12} md={6} key={name}>
@@ -59,6 +60,9 @@ export default function StatCards() {
           </StyledCard>
         </Grid>
       ))}
+      
     </Grid>
+    <Divider textAlign="left" sx={{marginBlockStart: '40px', fontSize:'20px'}}>Derniers Résultats</Divider>
+    </>
   );
 }

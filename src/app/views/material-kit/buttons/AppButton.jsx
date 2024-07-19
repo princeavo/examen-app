@@ -1,5 +1,6 @@
 import { Box, Button, Fab, Icon, IconButton, styled } from "@mui/material";
 import { Breadcrumb, SimpleCard } from "app/components";
+import SimpleForm from "../forms/SimpleForm";
 
 // STYLED COMPONENTS
 const AppButtonRoot = styled("div")(({ theme }) => ({
@@ -22,11 +23,14 @@ export default function AppButton() {
     <AppButtonRoot>
       <Box className="breadcrumb">
         <Breadcrumb
-          routeSegments={[{ name: "Material", path: "/material" }, { name: "Buttons" }]}
+          routeSegments={[{ name: "Admin", path: "/material" }, { name: "Inscription" }]}
         />
       </Box>
+      <SimpleCard title="Ajout d'une école">
+          <SimpleForm />
+        </SimpleCard>
 
-      <SimpleCard title="contained buttons">
+      {/* <SimpleCard title="contained buttons">
         <StyledButton variant="contained" color="inherit">
           Default
         </StyledButton>
@@ -168,7 +172,7 @@ export default function AppButton() {
         <Fab disabled aria-label="Delete" className="button">
           <Icon>delete</Icon>
         </Fab>
-      </SimpleCard>
+      </SimpleCard> */}
     </AppButtonRoot>
   );
 }
