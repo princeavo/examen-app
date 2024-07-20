@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Card, Checkbox, Grid, TextField, Box, styled, useTheme } from "@mui/material";
+import { Card, Checkbox, Grid, TextField, Box, styled, useTheme, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import emailjs from '@emailjs/browser';
+import Swal from 'sweetalert2';
+
+
 
 import useAuth from "app/hooks/useAuth";
 import { Paragraph } from "app/components/Typography";
@@ -77,6 +81,89 @@ export default function JwtLogin() {
     }
   };
 
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const [open, setOpen] = useState(false);
+  const [nom, setNom] = useState('');
+  const [sigle, setSigle] = useState('');
+  const [email, setEmail] = useState('');
+  const [contact, setContact] = useState('');
+  const [adresse, setAdresse] = useState('');
+  const [capacite, setCapacite] = useState('');
+  const [logo, setLogo] = useState('');
+
+  const handleSubmit = (e) => {
+    sendEmail(e)
+  };
+
+  const handleChange = (e, type) => {
+    switch(type){
+      case "nom":
+        setNom(e.target.value)
+        break;
+      case "sigle":
+        setSigle(e.target.value)
+        break;
+      case "email":
+        setEmail(e.target.value)
+        break;
+      case "contact":
+        setContact(e.target.value)
+        break;
+      case "adresse":
+        setAdresse(e.target.value)
+        break;
+      case "logo":
+        setLogo(e.target.value)
+        break;
+      case "capacite":
+        setCapacite(e.target.value)
+        break;
+      default:
+
+    }
+  };
+
+  const form = useRef();
+  const sendEmail = (e) => {
+    e.preventDefault();
+    console.log(form.current)
+    const formData = new FormData(form.current);
+  const formJson = Object.fromEntries(formData.entries());
+  console.log(formJson);
+
+    emailjs
+      .sendForm('service_6jdyjso', 'template_zf1zoph', form.current, {
+        publicKey: 'AGKx2agxzEol7OyAt',
+      })
+      .then(
+        () => {
+          Swal.fire({
+            title: 'Inscription réussie',
+            text: 'Vos informations ont été transmises à l\'administrateur. Vous recevrez un email contenant vos informations de connexion. ',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
+        },
+        (error) => {
+          console.error(error)
+          Swal.fire({
+            title: 'Erreur',
+            text: 'Une erreur est survenue lors de la soumission du formulaire. ',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          })
+        },
+      );
+  };
+
   return (
     <StyledRoot>
       <Card className="card">
@@ -115,7 +202,7 @@ export default function JwtLogin() {
                       size="small"
                       name="password"
                       type="password"
-                      label="Password"
+                      label="Mot de passe"
                       variant="outlined"
                       onBlur={handleBlur}
                       value={values.password}
@@ -135,13 +222,13 @@ export default function JwtLogin() {
                           sx={{ padding: 0 }}
                         />
 
-                        <Paragraph>Remember Me</Paragraph>
+                        <Paragraph>Se rappeler de moi</Paragraph>
                       </FlexBox>
 
                       <NavLink
                         to="/session/forgot-password"
                         style={{ color: theme.palette.primary.main }}>
-                        Forgot password?
+                        Mot de passe oublié ?
                       </NavLink>
                     </FlexBox>
 
@@ -151,16 +238,19 @@ export default function JwtLogin() {
                       loading={loading}
                       variant="contained"
                       sx={{ my: 2 }}>
-                      Login
+                      Se Connecter
                     </LoadingButton>
 
                     <Paragraph>
-                      Don't have an account?
-                      <NavLink
+                      Vous n'avez pas de compte ?
+                      {/* <NavLink
                         to="/session/signup"
                         style={{ color: theme.palette.primary.main, marginLeft: 5 }}>
                         Register
-                      </NavLink>
+                      </NavLink> */}
+                      <Button variant="text" onClick={handleClickOpen}>
+                          Inscrivez-vous
+                      </Button>
                     </Paragraph>
                   </form>
                 )}
@@ -169,6 +259,133 @@ export default function JwtLogin() {
           </Grid>
         </Grid>
       </Card>
+      
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          component: 'form',
+          onSubmit: (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
+            const formJson = Object.fromEntries(formData.entries());
+            const email = formJson.email;
+            console.log(email);
+            handleClose();
+          },
+        }}
+      >
+        <DialogTitle>Entrez vos informations</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Pour s'inscrire sur la plateforme, il vous faudra envoyer vos informations à l'administrateur.
+          </DialogContentText>
+          <form ref={form}>
+          <div>
+          <TextField
+                      fullWidth
+                      size="medium"
+                      autoFocus
+                      required
+                      name="nom"
+                      type="text"
+                      label="Nom"
+                      value={nom}
+                      onChange={(e) => handleChange(e, "nom")}
+                      variant="standard"
+                      sx={{ mb: 3 }}
+                    />
+                    <TextField
+                      fullWidth
+                      size="medium"
+                      autoFocus
+                      required
+                      name="sigle"
+                      type="text"
+                      label="Sigle"
+                      value={sigle}
+                      onChange={(e) => handleChange(e, "sigle")}
+                      variant="standard"
+                      sx={{ mb: 3 }}
+                    />
+                    <TextField
+                      fullWidth
+                      size="medium"
+                      autoFocus
+                      required
+                      name="email"
+                      type="email"
+                      label="Email"
+                      value={email}
+                      onChange={(e) => handleChange(e, "email")}
+                      variant="standard"
+                      sx={{ mb: 3 }}
+                    />
+                    <TextField
+                      fullWidth
+                      size="medium"
+                      autoFocus
+                      required
+                      name="contact"
+                      type="text"
+                      value={contact}
+                      onChange={(e) => handleChange(e, "contact")}
+                      label="Contact téléphonique"
+                      variant="standard"
+                      sx={{ mb: 3}}
+                    />
+                    <TextField
+                      fullWidth
+                      size="medium"
+                      autoFocus
+                      required
+                      name="adresse"
+                      type="text"
+                      label="Adresse Physique"
+                      value={adresse}
+                      onChange={(e) => handleChange(e, "adresse")}
+                      variant="standard"
+                      sx={{ mb: 3}}
+                    />
+                    <TextField
+                      fullWidth
+                      size="medium"
+                      autoFocus
+                      required
+                      name="Capacité"
+                      type="text"
+                      label="Capacité"
+                      value={capacite}
+                      onChange={(e) => handleChange(e, "capacite")}
+                      placeholder="Une approximation du nombre de vos élèves"
+                      variant="standard"
+                      sx={{ mb: 3 }}
+                    />
+                    <TextField
+                      fullWidth
+                      size="medium"
+                      autoFocus
+                      required
+                      name="logo"
+                      type="file"
+                      label="Logo"
+                      value={logo}
+                      onChange={(e) => handleChange(e, "logo")}
+                      variant="standard"
+                      sx={{ mb: 3 }}
+                    />
+                    </div>
+                    </form>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Annuler</Button>
+          <Button type="submit" onClick={(e) => handleSubmit(e)}>Envoyer</Button>
+        </DialogActions>
+      </Dialog>
+   
+  
+
+
     </StyledRoot>
   );
 }
